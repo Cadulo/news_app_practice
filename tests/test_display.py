@@ -1,7 +1,7 @@
 """Tests for display."""
 
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from platzi_news.core.models import Article
 from platzi_news.io.display import display_answer, display_articles, display_error
@@ -10,7 +10,7 @@ from platzi_news.io.display import display_answer, display_articles, display_err
 class TestDisplay(unittest.TestCase):
     """Test display functions."""
 
-    def setUp(self):
+    def setUp(self) -> None:
         """Set up test fixtures."""
         self.articles = [
             Article("Title 1", "Description 1", "http://example1.com"),
@@ -18,13 +18,13 @@ class TestDisplay(unittest.TestCase):
         ]
 
     @patch("platzi_news.io.display.console")
-    def test_display_articles_with_articles(self, mock_console):
+    def test_display_articles_with_articles(self, mock_console: Mock) -> None:
         """Test display_articles with articles."""
         display_articles(self.articles)
         mock_console.print.assert_called()
 
     @patch("platzi_news.io.display.console")
-    def test_display_articles_empty(self, mock_console):
+    def test_display_articles_empty(self, mock_console: Mock) -> None:
         """Test display_articles with no articles."""
         display_articles([])
         mock_console.print.assert_called_with(
@@ -32,7 +32,7 @@ class TestDisplay(unittest.TestCase):
         )
 
     @patch("platzi_news.io.display.console")
-    def test_display_answer(self, mock_console):
+    def test_display_answer(self, mock_console: Mock) -> None:
         """Test display_answer."""
         display_answer("Test answer")
         mock_console.print.assert_called_with(
@@ -40,13 +40,13 @@ class TestDisplay(unittest.TestCase):
         )
 
     @patch("platzi_news.io.display.console")
-    def test_display_error(self, mock_console):
+    def test_display_error(self, mock_console: Mock) -> None:
         """Test display_error."""
         display_error("Test error")
         mock_console.print.assert_called_with("[bold red]Error:[/bold red] Test error")
 
     @patch("platzi_news.io.display.console")
-    def test_display_articles_formats_correctly(self, mock_console):
+    def test_display_articles_formats_correctly(self, mock_console: Mock) -> None:
         """Test display_articles formats articles correctly."""
         display_articles(self.articles)
         # Check that print was called multiple times

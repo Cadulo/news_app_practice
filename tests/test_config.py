@@ -17,7 +17,7 @@ class TestSettings(unittest.TestCase):
             "OPENAI_API_KEY": "test_openai",
         },
     )
-    def test_settings_creation_with_env(self):
+    def test_settings_creation_with_env(self) -> None:
         """Test Settings creation with environment variables."""
         settings = Settings()
         self.assertEqual(settings.guardian_api_key, "test_guardian")
@@ -43,7 +43,7 @@ class TestSettings(unittest.TestCase):
             "OPENAI_MAX_TOKENS": "300",
         },
     )
-    def test_settings_custom_values(self):
+    def test_settings_custom_values(self) -> None:
         """Test Settings with custom values."""
         settings = Settings()
         self.assertEqual(settings.max_articles, 20)
@@ -51,7 +51,7 @@ class TestSettings(unittest.TestCase):
         self.assertEqual(settings.openai_model, "gpt-3.5-turbo")
         self.assertEqual(settings.openai_max_tokens, 300)
 
-    def test_settings_case_insensitive(self):
+    def test_settings_case_insensitive(self) -> None:
         """Test Settings is case insensitive."""
         with patch.dict(
             "os.environ",

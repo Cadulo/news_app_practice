@@ -8,23 +8,25 @@ from platzi_news.core.models import Article
 class TestArticle(unittest.TestCase):
     """Test Article dataclass."""
 
-    def test_article_creation(self):
+    def test_article_creation(self) -> None:
         """Test creating an Article instance."""
         article = Article(
-            title="Test Title", description="Test Description", url="http://example.com"
+            title="Test Title",
+            description="Test Description",
+            url="http://example.com",
         )
         self.assertEqual(article.title, "Test Title")
         self.assertEqual(article.description, "Test Description")
         self.assertEqual(article.url, "http://example.com")
 
-    def test_article_attributes(self):
+    def test_article_attributes(self) -> None:
         """Test Article attributes are accessible."""
         article = Article("Title", "Desc", "URL")
         self.assertTrue(hasattr(article, "title"))
         self.assertTrue(hasattr(article, "description"))
         self.assertTrue(hasattr(article, "url"))
 
-    def test_article_equality(self):
+    def test_article_equality(self) -> None:
         """Test Article equality."""
         article1 = Article("Title", "Desc", "URL")
         article2 = Article("Title", "Desc", "URL")

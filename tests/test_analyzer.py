@@ -12,7 +12,8 @@ class TestOpenAIAnalyzer(unittest.TestCase):
     """Test OpenAIAnalyzer."""
 
     @patch("platzi_news.analysis.analyzer.OpenAI")
-    def test_analyze_success(self, mock_openai):
+    def test_analyze_success(self, mock_openai: Mock) -> None:
+        """Test successful analysis."""
         mock_client = Mock()
         mock_openai.return_value = mock_client
         mock_response = Mock()
@@ -26,13 +27,15 @@ class TestOpenAIAnalyzer(unittest.TestCase):
         self.assertEqual(answer, "Test answer")
 
     @patch("platzi_news.analysis.analyzer.OpenAI")
-    def test_analyze_no_articles(self, mock_openai):
+    def test_analyze_no_articles(self, mock_openai: Mock) -> None:
+        """Test analysis with no articles."""
         analyzer = OpenAIAnalyzer("fake_key")
         answer = analyzer.analyze([], "Question")
         self.assertEqual(answer, "No se encontraron artículos para analizar.")
 
     @patch("platzi_news.analysis.analyzer.OpenAI")
-    def test_analyze_error(self, mock_openai):
+    def test_analyze_error(self, mock_openai: Mock) -> None:
+        """Test analysis error handling."""
         mock_client = Mock()
         mock_openai.return_value = mock_client
         mock_client.chat.completions.create.side_effect = Exception("API error")
@@ -47,7 +50,8 @@ class TestGetAnalyzer(unittest.TestCase):
     """Test get_analyzer factory."""
 
     @patch("platzi_news.config.settings")
-    def test_get_analyzer_success(self, mock_settings):
+    def test_get_analyzer_success(self, mock_settings: Mock) -> None:
+        """Test successful analyzer creation."""
         mock_settings.openai_api_key = "fake_key"
         analyzer = get_analyzer()
         self.assertIsInstance(analyzer, OpenAIAnalyzer)
